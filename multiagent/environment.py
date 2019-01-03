@@ -333,3 +333,9 @@ class BatchMultiAgentEnv(gym.Env):
         for env in self.env_batch:
             results_n += env.render(mode, close)
         return results_n
+
+    def close(self):
+        for i, viewer in enumerate(self.viewers):
+            if viewer is not None:
+                viewer.close()
+                self.viewers[i] = None
